@@ -14,7 +14,7 @@ if parsed.options.version
 end
 
 inputs = parsed.files.map { |file| File.read(file) }
-inputs = [$stdin.each_line.to_a.join("\n")] if inputs.empty?
+inputs = [$stdin.each_line.to_a.join] if inputs.empty?
 
 inputs.each do |input|
   it = YAML.safe_load(input).to_deep_struct
