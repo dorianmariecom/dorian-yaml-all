@@ -17,6 +17,6 @@ inputs = parsed.files.map { |file| File.read(file) }
 inputs = [$stdin.each_line.to_a.join] if inputs.empty?
 
 inputs.each do |input|
-  YAML.safe_load(input).to_deep_struct
+  it = YAML.safe_load(input).to_deep_struct
   eval(parsed.arguments.join(" "))
 end
