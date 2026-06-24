@@ -1,28 +1,41 @@
-# `dorian-each`
+# `dorian-yaml-all`
 
-Evaluates some code on each line of the input
+Run one Ruby snippet against the whole YAML value.
 
-e.g. `ls -l | each "puts l.split.first"`
-
-### Install
+## Install
 
 ```bash
-gem install dorian-each
+gem install dorian-yaml-all
 ```
 
-Or as part of my other gems:
+Also included in the aggregate gem:
 
 ```bash
 gem install dorian
 ```
 
-### Usage
-
-From my history:
+## Usage
 
 ```bash
-pbpaste | each "puts line.split('-')[1].split.first" | uniq
-git grep Thing test/ | grep isocode | each "puts l.split(':').first" | sort | uniq | xvim
-cat file.csv | each "code, name = l.split(\"\\t\"); if code.include?(','); puts code; else; puts code.gsub(' ', '') + ',' + name; end"
-git grep thing | grep " doc " | each "puts l.split(':').first" | xvim
+yaml-all [file ...] "ruby code"
+```
+
+Run `yaml-all -h` for generated option details and `yaml-all -v` for the installed version.
+
+## Notes
+
+- Sets `it` to the parsed YAML value converted to deep structs.
+
+## Examples
+
+### Print a top-level value
+
+```bash
+printf 'name: Dorian\n' | yaml-all "puts it.name"
+```
+
+Output:
+
+```text
+Dorian
 ```
